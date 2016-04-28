@@ -1,0 +1,13 @@
+
+public class Pokemon {
+	String name;
+	long hp;
+	public Event[] atacks=new Event[4];
+	public Pokemon (String name,long hp){
+		this.name=name;
+		this.hp=hp;
+	}
+	
+	
+
+}

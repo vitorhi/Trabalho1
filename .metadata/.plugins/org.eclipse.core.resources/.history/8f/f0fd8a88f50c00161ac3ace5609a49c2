@@ -1,0 +1,21 @@
+
+public class Simulacao {
+
+	public static void main(String[] args) {
+		//criacao dos pokemons
+		Pokemon Pikachu = new Pokemon("Pikachu",35);
+		Pokemon Bulbassauro = new Pokemon("Bulbassauro",40);
+		Pokemon Charmander = new Pokemon("Charmander",50);
+		Pokemon Pidgeotto = new Pokemon("Pidgeotto",35);
+		Pokemon Rattata = new Pokemon("Rattata",35);
+		Pokemon Zubat = new Pokemon("Zubat",28);
+		Pokemon Magikarpa = new Pokemon("Magikarpa",30);
+		Pokemon Squirtle = new Pokemon("Squirtle",30);
+		
+		Pokemon[]pokemons_Ash={Pikachu,Bubassauro,Charmander};
+		PokemonTrainer Ash= new PokemonTrainer();
+		PokemonTrainer RocketTm= new PokemonTrainer();
+		
+	}
+
+}
