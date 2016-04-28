@@ -126,7 +126,7 @@ class UseItem extends Event{
 	}
 
 	public void action() {
-		
+		System.out.println("Usou o item de vida");
 
 	}
 	public String getClassName(){

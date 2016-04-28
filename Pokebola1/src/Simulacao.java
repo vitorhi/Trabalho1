@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 class Battle{
 	PokemonTrainer fighter1;
 	PokemonTrainer fighter2;
@@ -21,10 +22,6 @@ class Battle{
 			player=fighter2;
 
 		System.out.println("Você escolheu "+player.name);
-
-
-
-
 
 	}
 
