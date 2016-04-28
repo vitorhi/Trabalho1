@@ -40,13 +40,41 @@ public class Simulacao {
 		
 		//criacao dos pokemons
 		Pokemon Pikachu = new Pokemon("Pikachu",35);
+		Pikachu.implementAtack("Choque do trovão", 1, 10);
+		Pikachu.implementAtack("Choque do trovão", 2, 10);
+		Pikachu.implementAtack("Choque do trovão", 3, 10);
+		
 		Pokemon Bulbassauro = new Pokemon("Bulbassauro",40);
+		Pikachu.implementAtack("Choque do trovão", 3, 10);
+		Pikachu.implementAtack("Choque do trovão", 2, 10);
+		Pikachu.implementAtack("Choque do trovão", 1, 10);
+		Pikachu.implementAtack("Choque do trovão", 4, 10);
+		
 		Pokemon Charmander = new Pokemon("Charmander",50);
+		Pikachu.implementAtack("Choque do trovão", 4, 10);
+		Pikachu.implementAtack("Choque do trovão", 2, 10);
+		
 		Pokemon Pidgeotto = new Pokemon("Pidgeotto",35);
+		Pikachu.implementAtack("Choque do trovão", 2, 10);
+		
 		Pokemon Rattata = new Pokemon("Rattata",35);
+		Pikachu.implementAtack("Choque do trovão", 3, 10);
+		Pikachu.implementAtack("Choque do trovão", 2, 10);
+		Pikachu.implementAtack("Choque do trovão", 4, 10);
+		
 		Pokemon Zubat = new Pokemon("Zubat",28);
+		Pikachu.implementAtack("Choque do trovão", 4, 10);
+		Pikachu.implementAtack("Choque do trovão", 3, 10);
+		Pikachu.implementAtack("Choque do trovão", 2, 10);
+		Pikachu.implementAtack("Choque do trovão", 4, 10);
+		
+		
 		Pokemon Magikarpa = new Pokemon("Magikarpa",30);
+		Pikachu.implementAtack("Choque do trovão", 4, 10);
+		Pikachu.implementAtack("Choque do trovão", 2, 10);
+		
 		Pokemon Squirtle = new Pokemon("Squirtle",30);
+		Pikachu.implementAtack("Choque do trovão", 4, 10);
 		
 		Pokemon[]pokemons_Ash={Pikachu,Bulbassauro,Charmander,Pidgeotto};
 		Pokemon[]pokemons_Rocket={Rattata,Zubat,Magikarpa,Squirtle};

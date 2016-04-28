@@ -22,14 +22,15 @@ public class Pokemon {
 	}
 	public void implementAtack(String nome,int atkPri,int q){
 		
-		Atack at= new Atack(nome,atkPri,q);
-		atacks[i++]=at;
 		
+		Atack at= new Atack(nome,atkPri,q);
+		atacks[(i%4)]=at;
+		i++;
 		
 	}
 	
-	public Atack getAtack(int i){
-		return atacks[i];
+	public Atack getAtack(int n){
+		return atacks[n];
 	}
 	public boolean isDead(){
 		if(dead==true)

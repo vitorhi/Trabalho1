@@ -29,15 +29,9 @@ class EventSet {
 		if(i >= events.length)
 			return;
 		else{
-			if(e.getClassName()=="Atack"){
-				
-				
-			}
-			
-			else{
-				events[i] = e;
-				i++;
-			}	
+			events[i] = e;
+			i++;
+
 		}
 
 	}
@@ -50,8 +44,7 @@ class EventSet {
 			if(start == next) looped = true;
 			// If it loops past start, the list
 			// is empty:
-			if((next == (start + 1) % events.length)
-					&& looped)
+			if((next == (start + 1) % events.length)&& looped)
 				return null;
 		} while(events[next] == null);
 		return events[next];
@@ -91,7 +84,7 @@ class Atack extends Event{
 	}
 
 	public void action() {
-
+		System.out.println("usou "+name);
 
 	}
 	public String getClassName(){
@@ -148,7 +141,7 @@ class RunAway extends Event{
 
 
 	public void action() {
-
+		System.out.println("fugiu da luta");
 
 	}
 	public String getClassName(){
