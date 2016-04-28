@@ -1,6 +1,11 @@
 
 public class PokemonTrainer {
 	String name;
-	Pokemon []pokemons= new Pokemon[4];
+	Pokemon []pokemons;
+	
+	public PokemonTrainer(Pokemon[]vector_pokemon){
+		pokemons=vector_pokemon;
+	}
+	
 	
 }
