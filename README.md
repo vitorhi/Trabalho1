@@ -4,3 +4,8 @@
 semestre de 2016.
 
   O programa consiste em uma simulação de Batalha Pokemon entre 2 treinadores pokemons.
+  
+  Alunos:
+  
+  Vítor Hideki Ishikura       9344921
+  Henrique Spadim             9373441
