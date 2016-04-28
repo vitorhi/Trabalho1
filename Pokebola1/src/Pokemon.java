@@ -3,6 +3,7 @@ public class Pokemon {
 	String name;
 	int hp;
 	boolean dead;
+	static int i=0;
 	public Atack[] atacks=new Atack[4];
 	
 	public Pokemon (String name,int hp){
@@ -19,7 +20,11 @@ public class Pokemon {
 		else
 			hp=hp-atk.quantity();	
 	}
-	public void implementAtack(String nome,int atkPri){
+	public void implementAtack(String nome,int atkPri,int q){
+		
+		Atack at= new Atack(nome,atkPri,q);
+		atacks[i++]=at;
+		
 		
 	}
 	
