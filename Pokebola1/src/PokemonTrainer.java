@@ -1,0 +1,6 @@
+
+public class PokemonTrainer {
+	String name;
+	Pokemon []pokemons= new Pokemon[4];
+	
+}
