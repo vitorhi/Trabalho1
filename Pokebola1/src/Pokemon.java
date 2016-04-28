@@ -36,8 +36,7 @@ public class Pokemon {
 	}
 	
 	public void implementAtack(String nome,int atkPri,int q){
-		
-		
+				
 		Atack at= new Atack(nome,atkPri,q);
 		atacks[(i%4)]=at;
 		i++;

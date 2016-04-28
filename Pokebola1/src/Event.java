@@ -1,6 +1,5 @@
 
 abstract public class Event {
-	private long evtTime=1;	
 
 	int priority;
 	String name;
@@ -62,7 +61,7 @@ class Controller {
 		while((e = es.getNext()) != null) {
 
 			e.action();
-			System.out.println(""e.eventName());
+			
 			es.removeCurrent();
 
 		}
@@ -101,12 +100,10 @@ class SwapPokemon extends Event{
 		priority=3;
 
 	}
-
 	
-	
-	public void action(Pokemon b) {
-		System.out.println("Trocou de pokemon para"+b.name);
-
+	public void action() {
+		System.out.println("Trocou de pokemon");
+		
 	}
 	public String getClassName(){
 		return"SwapPokemon";
