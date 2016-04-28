@@ -1,15 +1,22 @@
-
+import java.util.*;
 public class PokemonTrainer {
 	String name;
+	Queue<Pokemon> queue = new LinkedList<Pokemon>();
 	Pokemon []pokemons;
 	// é aqui que coloquei a prioridade
 	static int _prioridade = 0;
 	
 	public PokemonTrainer(Pokemon[]vector_pokemon,String name){
-		pokemons=vector_pokemon;
+		for(int i=0;i<4;i++){
+			queue.add(vector_pokemon[i]);
+		}
+//		pokemons=vector_pokemon;
 		this.name=name;
 		// é aqui que adicionei a prioridade ao jogador
-		prioridade = _prioridade++;
+		_prioridade++;
+	}
+	public Pokemon[] getPokList(){
+		return pokemons;
 	}
 	
 	

@@ -102,12 +102,10 @@ class SwapPokemon extends Event{
 
 	}
 
-	public int quantity(){
-		return quant;
-	}
 	
-	public void action() {
-
+	
+	public void action(Pokemon b) {
+		System.out.println("Trocou de pokemon para"+b.name);
 
 	}
 	public String getClassName(){
