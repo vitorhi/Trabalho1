@@ -8,7 +8,10 @@ public class PokemonTrainer {
 	
 	public PokemonTrainer(Pokemon[]vector_pokemon,String name){
 
-		
+		for(int i=0;i<vector_pokemon.length;i++){
+
+			queue.add(vector_pokemon[i]);
+		}
 //		pokemons=vector_pokemon;
 		this.name=name;
 		// é aqui que adicionei a prioridade ao jogador
