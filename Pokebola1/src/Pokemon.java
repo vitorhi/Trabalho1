@@ -17,8 +17,14 @@ public class Pokemon {
 			return;		
 		}
 		else
-			hp=hp-atk.quantity();
+			hp=hp-atk.quantity();	
+	}
+	public void implementAtack(String nome,int atkPri){
 		
+	}
+	
+	public Atack getAtack(int i){
+		return atacks[i];
 	}
 	public boolean isDead(){
 		if(dead==true)
