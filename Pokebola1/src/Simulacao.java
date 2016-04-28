@@ -12,12 +12,17 @@ class Battle{
 		Scanner scan= new Scanner(System.in);
 		
 		System.out.println("Escolha seu jogador:");
-		System.out.print("1)"+fighter1.name+"/n 2)"+fighter2.name);
+		System.out.println("1)"+fighter1.name+"\n2)"+fighter2.name);
 		if(scan.nextInt()==1){
 			player=fighter1;
+			
 		}
 		else
 			player=fighter2;
+		
+		System.out.println("Você escolheu "+player.name);
+		
+		
 		
 		
 		
@@ -47,11 +52,12 @@ public class Simulacao {
 		Pokemon[]pokemons_Rocket={Rattata,Zubat,Magikarpa,Squirtle};
 		
 		//criacao treinadores
-		PokemonTrainer Ash= new PokemonTrainer(pokemons_Ash,);
-		PokemonTrainer RocketTm= new PokemonTrainer(pokemons_Rocket);
+		PokemonTrainer Ash= new PokemonTrainer(pokemons_Ash,"Ash");
+		PokemonTrainer RocketTm= new PokemonTrainer(pokemons_Rocket,"Equipe Rocket");
 		
 		//inicialização da batalha
-		Battle bt = new Battle(Ash, Brock);
+		Battle bt = new Battle(Ash, RocketTm);
+		bt.Init();	
 		
 	}
 

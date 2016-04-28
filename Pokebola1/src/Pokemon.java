@@ -1,11 +1,11 @@
 
 public class Pokemon {
 	String name;
-	long hp;
+	int hp;
 	boolean dead;
-	public Event[] atacks=new Event[4];
+	public Atack[] atacks=new Atack[4];
 	
-	public Pokemon (String name,long hp){
+	public Pokemon (String name,int hp){
 		this.name=name;
 		this.hp=hp;
 		dead=false;
@@ -20,6 +20,11 @@ public class Pokemon {
 			hp=hp-atk.quantity();
 		
 	}
-	
+	public boolean isDead(){
+		if(dead==true)
+			return true;
+		else
+			return false;
+	}
 
 }
