@@ -17,7 +17,7 @@ public class PokemonTrainer {
 		// é aqui que adicionei a prioridade ao jogador
 		_prioridade++;
 	}
-	public Pokemon getPokList(){
+	public Pokemon getPokqueue(){
 		return queue.element();
 	}
 	

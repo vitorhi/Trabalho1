@@ -3,7 +3,7 @@ import java.util.Scanner;
 class Battle{
 	PokemonTrainer fighter1;
 	PokemonTrainer fighter2;
-	PokemonTrainer player;
+	PokemonTrainer player,enemy;
 
 	public Battle(PokemonTrainer a,PokemonTrainer b){
 		fighter1=a;
@@ -16,12 +16,26 @@ class Battle{
 		System.out.println("1)"+fighter1.name+"\n2)"+fighter2.name);
 		if(scan.nextInt()==1){
 			player=fighter1;
-
+			enemy=fighter2;
 		}
-		else
+		else{
 			player=fighter2;
-
+			enemy=fighter1;
+		}	
 		System.out.println("Você escolheu "+player.name);
+		EventSet es_player=new EventSet();
+		es_player.add(player.getPokqueue().getAtack(1));
+		es_player.add(player.getPokqueue().getAtack(1));
+		es_player.add(player.getPokqueue().getAtack(1));
+		es_player.add(player.getPokqueue().getAtack(1));
+		es_player.add(player.getPokqueue().getAtack(1));
+		
+		EventSet es_enemy=new EventSet();
+		es_player.add(enemy.getPokqueue().getAtack(1));
+		es_player.add(enemy.getPokqueue().getAtack(1));
+		es_player.add(enemy.getPokqueue().getAtack(1));
+		es_player.add(enemy.getPokqueue().getAtack(1));
+		es_player.add(enemy.getPokqueue().getAtack(1));
 
 	}
 
