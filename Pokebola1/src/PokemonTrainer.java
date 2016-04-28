@@ -7,7 +7,7 @@ public class PokemonTrainer {
 	static int _prioridade = 0;
 	
 	public PokemonTrainer(Pokemon[]vector_pokemon,String name){
-		for(int i=0;i<4;i++){
+		for(int i=0;i< vector_pokemon.length() ;i++){
 			queue.add(vector_pokemon[i]);
 		}
 //		pokemons=vector_pokemon;
