@@ -11,7 +11,7 @@ public class Pokemon {
 		dead=false;
 	}
 	
-	public void LoseHp(Event atk){ 
+	public void LoseHp(Atack atk){ 
 		if(atk.quantity()>hp){
 			dead=true;
 			return;		
