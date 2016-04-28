@@ -102,7 +102,10 @@ class SwapPokemon extends Event{
 
 	}
 
-
+	public int quantity(){
+		return quant;
+	}
+	
 	public void action() {
 
 
@@ -113,17 +116,22 @@ class SwapPokemon extends Event{
 
 
 }
+
 class UseItem extends Event{
+
+	int quant = 10;
 
 	public UseItem() {
 		super("Usar item");		
 		priority=2;
-
+	}
+	// O quanto ele recuperou de vida
+	public int quantity(){
+		return quant;
 	}
 
-
 	public void action() {
-
+		
 
 	}
 	public String getClassName(){
