@@ -2,9 +2,9 @@
 public class Pokemon {
 	String name;
 	int hp;
-	private static int max_hp;
+	private int max_hp;
 	boolean dead;
-	protected static int i=0;
+	protected int i=0;
 	public Atack[] atacks=new Atack[4];
 	
 	public Pokemon (String name,int hp){
