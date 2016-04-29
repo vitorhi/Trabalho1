@@ -18,6 +18,10 @@ public class PokemonTrainer {
 		_prioridade++;
 	}
 	public Pokemon getPokqueue(){
+		// caso nao haja nenhum Pokemon
+		if(queue.element() == NULL){
+	        	System.out.println("Todos os pokemons morreram!");
+		}
 		return queue.element();
 	}
 	
