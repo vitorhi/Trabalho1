@@ -154,33 +154,33 @@ class Controller {
 			}
 			
 			//caso apenas um dos eventos seja um ataque
-			else if((e.getClassName()=="Atack"&&f.getClassName()!="Atack")||(e.getClassName()!="Atack"&&f.getClassName()=="Atack")){
-				if(e.priority<f.priority){
-					if(e.ready()) {
-						e.action();					
-						es_a.removeCurrent();					
-					}
-					if(f.ready()) {
-						f.action();
-						es_b.removeCurrent();
-					}
-				}
-				if(e.priority>f.priority){
-					if(f.ready()) {
-						f.action();
-						es_b.removeCurrent();
-					}
-					if(e.ready()) {
-						e.action();					
-						es_a.removeCurrent();					
-					}					
-				}
-				
-			}
+//			else if((e.getClassName()=="Atack"&&f.getClassName()!="Atack")||(e.getClassName()!="Atack"&&f.getClassName()=="Atack")){
+//				if(e.priority<=f.priority){
+//					if(e.ready()) {
+//						e.action();					
+//						es_a.removeCurrent();					
+//					}
+//					if(f.ready()) {
+//						f.action();
+//						es_b.removeCurrent();
+//					}
+//				}
+//				if(e.priority>f.priority){
+//					if(f.ready()) {
+//						f.action();
+//						es_b.removeCurrent();
+//					}
+//					if(e.ready()) {
+//						e.action();					
+//						es_a.removeCurrent();					
+//					}					
+//				}
+//				
+//			}
 			
 			
 			//caso nenhum dos eventos seja um ataque
-			else if(e.getClassName()!="Atack"&&f.getClassName()!="Atack"){
+			else if(e.getClassName()!="Atack"||f.getClassName()!="Atack"){
 				if(e.priority<f.priority){
 					if(e.ready()) {
 						e.action();					
