@@ -36,6 +36,7 @@ abstract public class Event {
 	
 	public void setTrainer(PokemonTrainer Trainer,PokemonTrainer Enemy){
 		this.Enemy=Enemy;
+		
 		this.Trainer=Trainer;
 	}
 	
@@ -57,9 +58,11 @@ class EventSet {
 	
 	public EventSet(PokemonTrainer a,PokemonTrainer b){
 		TrainerSet=a;
+		
 		EnemySet=b;
 	}
 	public void add(Event e) {
+		
 		e.setTrainer(TrainerSet,EnemySet);
 //		System.out.println("2");
 		if(i >= events.length)
@@ -90,17 +93,19 @@ class EventSet {
 	}
 }
 class Controller {
+	private EventSet es_a; 	
+	private EventSet es_b;
 	
-	PokemonTrainer t1,t2;
-	public Controller(PokemonTrainer x,PokemonTrainer y){
-		t1=x;
-		t2=y;
+	public Controller(PokemonTrainer x, PokemonTrainer y){
+		es_a = new EventSet(x,y);	
+		es_b = new EventSet(y,x);
 	}
-	private EventSet es_a = new EventSet(t1,t2);
-	private EventSet es_b = new EventSet(t2,t1);
+	;
 	
 	public void addEvent(Event a,Event b) {
+//		System.out.println(es_a.EnemySet.name);
 		es_a.add(a);
+		
 		
 		es_b.add(b);
 		
@@ -111,21 +116,30 @@ class Controller {
 		Event f;
 		while(((e = es_a.getNext()) != null)&&((f = es_b.getNext()) != null)) {
 			
-			//caso o evento seja um ataque
-			if(e.getClassName()=="Atack"){
+			//caso os dois eventos sejam um ataque
+			if(e.getClassName()=="Atack"&&f.getClassName()=="Atack"){
 				
+				 
 
 				if(e.atkPriority<=f.atkPriority){
-					if(e.ready()) {
-						
-
-						e.action();		
-						es_a.removeCurrent();					
-					}
-					if(f.ready()) {
+					if(e.ready()&&f.ready()) {
+//						System.out.println(e.name);
+						e.action();	
+						es_a.removeCurrent();
 						f.action();
 						es_b.removeCurrent();
+											
 					}
+//					if(e.ready()) {
+////						System.out.println(e.name);
+//						e.action();		
+//
+//						es_a.removeCurrent();					
+//					}
+//					if(f.ready()) {
+//						f.action();
+//						es_b.removeCurrent();
+//					}
 				}
 				if(e.atkPriority>f.atkPriority){
 					if(f.ready()) {
@@ -139,8 +153,34 @@ class Controller {
 				}
 			}
 			
-			//caso o evento não seja um ataque
-			else{
+			//caso apenas um dos eventos seja um ataque
+			else if((e.getClassName()=="Atack"&&f.getClassName()!="Atack")||(e.getClassName()!="Atack"&&f.getClassName()=="Atack")){
+				if(e.priority<f.priority){
+					if(e.ready()) {
+						e.action();					
+						es_a.removeCurrent();					
+					}
+					if(f.ready()) {
+						f.action();
+						es_b.removeCurrent();
+					}
+				}
+				if(e.priority>f.priority){
+					if(f.ready()) {
+						f.action();
+						es_b.removeCurrent();
+					}
+					if(e.ready()) {
+						e.action();					
+						es_a.removeCurrent();					
+					}					
+				}
+				
+			}
+			
+			
+			//caso nenhum dos eventos seja um ataque
+			else if(e.getClassName()!="Atack"&&f.getClassName()!="Atack"){
 				if(e.priority<f.priority){
 					if(e.ready()) {
 						e.action();					
@@ -170,7 +210,7 @@ class Controller {
 }
 
 class Atack extends Event{
-	int quant;
+	
 	int atkPriority;
 
 	public Atack(String name,int atkPriority,int q ) {
@@ -186,9 +226,11 @@ class Atack extends Event{
 	}
 
 	public void action() {
-		System.out.println("2");
-		System.out.println(Trainer.getPokqueue()+ " usou " +name);
 		
+		System.out.println(Trainer.getPokqueue().name+ " usou " +name);
+
+		
+
 		//caso o dano seje maior do que o hp do pokemon
 		if(quant>Enemy.getPokqueue().hp){
 			//o Pokemon é morto
@@ -202,11 +244,10 @@ class Atack extends Event{
 		}
 		
 		//caso o dano seje menor do que o hp do pokemon
-		else{
+		else{		
 			
-
 			Enemy.getPokqueue().hp=(Enemy.getPokqueue().hp)-quant;
-			System.out.println(Enemy.getPokqueue().name+" ficou com "+Enemy.getPokqueue().hp);
+			System.out.println(Enemy.getPokqueue().name+" ficou com "+Enemy.getPokqueue().hp+" de vida");
 		}
 			
 				
@@ -229,7 +270,7 @@ class SwapPokemon extends Event{
 	
 	public void action() {
 		Trainer.queue.add(Trainer.queue.poll());
-		System.out.println(Trainer.name+" trocou de pokemon para "+Trainer.queue.peek());
+		System.out.println(Trainer.name+" trocou de pokemon para "+Trainer.queue.peek().name);
 		
 		
 	}
@@ -244,8 +285,10 @@ class UseItem extends Event{
 
 	int quant = 10;
 
-	public UseItem(long eventTime) {
-		super("Usar item",eventTime);		
+	public UseItem(long eventTime) {	
+
+		super("Usar item",eventTime);
+		System.out.println("imploro");
 		priority=2;
 	}
 	
@@ -278,7 +321,7 @@ class RunAway extends Event{
 
 	public void action() {
 		System.out.println(Trainer.name+" fugiu da luta");
-
+		
 	}
 	public String getClassName(){
 		return"RunAway";

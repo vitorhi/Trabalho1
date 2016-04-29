@@ -28,8 +28,8 @@ public class Pokemon {
 		
 	}
 	
-	public Atack getAtack(int n){
-		
+	public Atack getAtack(int n,long evtime){
+		atacks[n].evtTime=evtime;
 
 		return atacks[n];
 	}

@@ -3,6 +3,9 @@ public class PokemonTrainer {
 	String name;
 	Queue<Pokemon> queue = new LinkedList<Pokemon>();
 	
+	
+	
+	
 	// é aqui que coloquei a prioridade
 	static int _prioridade = 0;
 	
@@ -23,15 +26,24 @@ public class PokemonTrainer {
 	}
 	public Pokemon getPokqueue(){
 		
-		
+
 		 if(queue.peek() == null){
 			 System.out.println("Todos os pokemons morreram!");
 			 return null;			 
 		 }	 
-		
 		return queue.peek();
 	}
 	
-	
-	
+	public SwapPokemon PmonSP(long evTime){
+		SwapPokemon SP=new SwapPokemon(evTime);
+		return SP;
+	}
+	public UseItem PmonUI(long evTime){
+		UseItem		UI=new UseItem(evTime);
+		return UI;
+	}
+	public RunAway PmonRA(long evTime){
+		RunAway		RA=new RunAway(evTime);
+		return RA;
+	}
 }

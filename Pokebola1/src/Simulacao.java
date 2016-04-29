@@ -26,16 +26,23 @@ class Battle{
 		}	
 		scan.close();
 		System.out.println("Você escolheu "+player.name);
+		System.out.println();
 		Controller control= new Controller(player,enemy);
 		
 		long tm=System.currentTimeMillis();
-		
-		control.addEvent(player.getPokqueue().getAtack(0),enemy.getPokqueue().getAtack(0));
-		
-		player.getPokqueue().getAtack(1).atkTimeSet(tm);
-		enemy.getPokqueue().getAtack(1).atkTimeSet(tm+1600);
-		control.run();
 
+		control.addEvent(player.getPokqueue().getAtack(0,tm),enemy.getPokqueue().getAtack(0,tm));
+
+//		player.getPokqueue().getAtack(1).atkTimeSet(tm);
+//		enemy.getPokqueue().getAtack(1).atkTimeSet(tm+800);
+		
+		control.addEvent(player.getPokqueue().getAtack(1,tm),enemy.getPokqueue().getAtack(2,tm));
+
+//		player.getPokqueue().getAtack(1).atkTimeSet(tm+1600);
+//		enemy.getPokqueue().getAtack(0).atkTimeSet(tm+2400);
+		control.addEvent(player.PmonSP(tm),enemy.getPokqueue().getAtack(2,tm));
+		control.run();
+		
 		
 		
 		
