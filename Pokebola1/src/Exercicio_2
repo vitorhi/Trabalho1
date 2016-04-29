@@ -1,0 +1,160 @@
+import java.util.Random;
+
+
+public class Exercicio_2 {
+
+	// Posicao do personagem é 'P', o mato é 'M', e chao é ' '
+	//
+	//  __________
+	// |XXX   X  |
+	// |XXX  X   |
+	// |XXXX   P |
+	// |X X    X |
+	// |_________|
+	//
+	// 'a' -> esquerda
+	// 's' -> para baixo
+	// 'd' -> direita
+	// 'w' -> para cima
+	//
+	
+	char[][] Mapa= { {'_', '_', '_', '_', '_', '_', '_', '_', '_', '_'},
+					 {'|', 'X', 'X', 'X', ' ', ' ', ' ', 'X', ' ', '|'}, 
+					 {'|', 'X', 'X', 'X', ' ', ' ', 'X', ' ', ' ', '|'}, 
+					 {'|', 'X', 'X', 'X', 'X', ' ', ' ', ' ', 'P', '|'}, 
+					 {'|', 'X', ' ', 'X', ' ', ' ', ' ', ' ', 'X', '|'},
+					 {'|', '_', '_', '_', '_', '_', '_', '_', '_', '|'}};
+
+	// Quando o "Personagem" se move, se a posicao na frente dele nao for uma parede('|' ou '_')
+	// precisamos recolocar o que havia debaixo dele.
+	// A fim de saber onde e quando recolocar o "Mato(X)" ou "Espaco( )" no lugar, eu criei
+	// o char 'guardador_de_espacos'.
+	// Supus que o espaco debaixo do "Personagem" é um "Espaco( )"
+	char guardador_de_espacos = ' ';
+	
+	char[] andar = {'d', 'a', 'a', 'w', 'a', 'a', 'a', 'a', 's', 'w', 's', 'w', 'd', 's', 's', 'd', 's', 'd'};
+	
+	void andador(char[] andar, int i, int j, char[][] Mapa){
+		
+		System.out.println("Voce é o Personagem 'P' !");
+		
+		for(int k = 0; k < 18; k++){
+			
+			for(int aux_i = 0; aux_i < i; aux_i++){
+				for(int aux_j = 0; aux_j < j; aux_j++){
+					System.out.print(Mapa[aux_i][aux_j]);
+				}
+				System.out.println();
+			}
+				
+			if(andar[k] == 'a'){ // esquerda
+			
+				if(Mapa[i][j] == '_' || Mapa[i][j] == '|'){
+					System.out.println("Tolinho... Voce nao pode atravessar paredes!");
+					break;
+				}
+				
+				else{
+					Mapa[i][j] = guardador_de_espacos;
+					i -= 1;
+					break;
+				}
+			}
+			
+			else if(andar[k] == 's'){ // para baixo
+			
+				if(Mapa[i][j] == '_' || Mapa[i][j] == '|'){
+					System.out.println("Tolinho... Voce nao pode atravessar paredes!");
+					break;
+				}
+				
+				else{
+					Mapa[i][j] = guardador_de_espacos;
+					j += 1;
+					break;
+				}
+			}
+			
+			else if(andar[k] == 'd'){ // direita
+			
+				if(Mapa[i][j] == '_' || Mapa[i][j] == '|'){
+					System.out.println("Tolinho... Voce nao pode atravessar paredes!");
+					break;
+				}
+				
+				else{
+					Mapa[i][j] = guardador_de_espacos;
+					i += 1;
+					break;
+				}
+			}
+			
+			else if(andar[k] == 'w'){ // para cima
+				
+				if(Mapa[i][j] == '_' || Mapa[i][j] == '|'){
+					System.out.println("Tolinho... Voce nao pode atravessar paredes!");
+					break;
+				}
+				
+				else{
+					Mapa[i][j] = guardador_de_espacos;
+					j -= 1;
+					break;
+				}
+			}
+			substituidor_de_espacos(Mapa, i, j);
+		}
+	}
+
+	// Pega o mapa, e substitui aquele espaco pelo seu personagem
+	// Aqui dentro há  a funcao identificador_de_batalhas
+	
+	void substituidor_de_espacos(char[][] Mapa, int i, int j){
+
+		if(Mapa[i][j] == 'X'){
+			guardador_de_espacos = 'X';
+			Mapa[i][j] = 'P';
+			identificador_de_batalhas(Mapa, i, j);
+		}
+		
+		else if(Mapa[i][j] == ' '){
+			guardador_de_espacos = ' ';	
+			Mapa[i][j] = 'P';
+		}	
+	}
+
+	
+	// Identifica o mato ou o inimigo, e ve  se vc entra em uma batalha pokemon ou nao
+	// Se 'gerador' for menor que        0.5, nao entra em uma batalha
+	// Se 'gerador' for maior ou igual a 0.5,     entra em uma batalha
+
+	
+	void identificador_de_batalhas(char[][] Mapa, int i, int j){
+	
+		if(Mapa[i][j] == 'X'){
+			Random gerador = new Random();
+			if(gerador.nextFloat() < 0.5){
+				//Entra em um combate
+				fazedor_de_inimigos();
+			}
+		}
+	}
+	
+	void fazedor_de_inimigos(){
+		// Escolhe um dos pokemons
+		// Coloca o nome do Treinador o mesmo do pokemon(ou deixa em branco)
+		// Faz a lista de ataques aleatoriamente
+		// |
+		// |----> Pega o tamanho do vetor de ataques e coloca o seguinte padrao de ataques
+		//
+		// 	Random gerador = new Random(666);
+		// 	while(true){
+		//		ataque  = gerador.nextInt( lenght(vetor_com_os_ataques) );
+		//  }
+		// 
+		// 
+		// 
+	}
+}
+
+
