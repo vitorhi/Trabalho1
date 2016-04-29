@@ -9,19 +9,26 @@ public class PokemonTrainer {
 	public PokemonTrainer(Pokemon[]vector_pokemon,String name){
 
 		for(int i=0;i<vector_pokemon.length;i++){
-
+//			System.out.println(vector_pokemon[i].name);
 			queue.add(vector_pokemon[i]);
+//			System.out.println(queue.peek().name);
+
 		}
 
 		this.name=name;
+		
 		// é aqui que adicionei a prioridade ao jogador
 		_prioridade++;
+		
 	}
 	public Pokemon getPokqueue(){
+		
+		
 		 if(queue.peek() == null){
 			 System.out.println("Todos os pokemons morreram!");
 			 return null;			 
 		 }	 
+		
 		return queue.peek();
 	}
 	

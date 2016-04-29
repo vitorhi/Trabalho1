@@ -3,7 +3,7 @@ abstract public class Event {
 
 	int priority;
 	
-	public PokemonTrainer Trainer;
+	public PokemonTrainer Trainer,Enemy;
 	public String name;
 	protected long evtTime;
 	
@@ -34,9 +34,8 @@ abstract public class Event {
 
 	}
 	
-	public void setTrainer(PokemonTrainer Trainer){
-		System.out.println("2");
-
+	public void setTrainer(PokemonTrainer Trainer,PokemonTrainer Enemy){
+		this.Enemy=Enemy;
 		this.Trainer=Trainer;
 	}
 	
@@ -54,13 +53,14 @@ class EventSet {
 	private int i = 0;
 	private int next = 0;
 	public PokemonTrainer TrainerSet;
+	public PokemonTrainer EnemySet;
 	
-	public EventSet(PokemonTrainer a){
+	public EventSet(PokemonTrainer a,PokemonTrainer b){
 		TrainerSet=a;
+		EnemySet=b;
 	}
 	public void add(Event e) {
-		System.out.println("1");
-		e.setTrainer(TrainerSet);
+		e.setTrainer(TrainerSet,EnemySet);
 //		System.out.println("2");
 		if(i >= events.length)
 			return;
@@ -96,8 +96,8 @@ class Controller {
 		t1=x;
 		t2=y;
 	}
-	private EventSet es_a = new EventSet(t1);
-	private EventSet es_b = new EventSet(t2);
+	private EventSet es_a = new EventSet(t1,t2);
+	private EventSet es_b = new EventSet(t2,t1);
 	
 	public void addEvent(Event a,Event b) {
 		es_a.add(a);
@@ -113,9 +113,13 @@ class Controller {
 			
 			//caso o evento seja um ataque
 			if(e.getClassName()=="Atack"){
-				if(e.atkPriority<f.atkPriority){
+				
+
+				if(e.atkPriority<=f.atkPriority){
 					if(e.ready()) {
-						e.action();					
+						
+
+						e.action();		
 						es_a.removeCurrent();					
 					}
 					if(f.ready()) {
@@ -161,6 +165,7 @@ class Controller {
 			}
 			
 		}
+		//adicionar caso de vencedor e de empate
 	}
 }
 
@@ -181,22 +186,29 @@ class Atack extends Event{
 	}
 
 	public void action() {
-		System.out.println("usou "+name);
+		System.out.println("2");
+		System.out.println(Trainer.getPokqueue()+ " usou " +name);
+		
 		//caso o dano seje maior do que o hp do pokemon
-		if(quant>Trainer.getPokqueue().hp){
+		if(quant>Enemy.getPokqueue().hp){
 			//o Pokemon é morto
-			Trainer.getPokqueue().dead=true;
+			Enemy.getPokqueue().dead=true;
 			
 			//e removido da fila de pokemons do treinador
-			Trainer.queue.remove();
+			Enemy.queue.remove();
 			
-			System.out.println(Trainer.getPokqueue().name+"morreu...");
+			System.out.println(Enemy.getPokqueue().name+" morreu...");
 			return;		
 		}
 		
 		//caso o dano seje menor do que o hp do pokemon
-		else
-			Trainer.getPokqueue().hp=(Trainer.getPokqueue().hp)-quant;
+		else{
+			
+
+			Enemy.getPokqueue().hp=(Enemy.getPokqueue().hp)-quant;
+			System.out.println(Enemy.getPokqueue().name+" ficou com "+Enemy.getPokqueue().hp);
+		}
+			
 				
 
 	}
@@ -217,7 +229,7 @@ class SwapPokemon extends Event{
 	
 	public void action() {
 		Trainer.queue.add(Trainer.queue.poll());
-		System.out.println("Trocou de pokemon");
+		System.out.println(Trainer.name+" trocou de pokemon para "+Trainer.queue.peek());
 		
 		
 	}
@@ -241,13 +253,13 @@ class UseItem extends Event{
 		Pokemon curPok=Trainer.getPokqueue();
 		
 		if(curPok.hp + quant >= curPok.hp){
-			curPok.hp = Pokemon.getMax_hp();//chance de estar errado, pois max hp é estatico
+			curPok.hp = Trainer.getPokqueue().max_hp;
 			return;
 		}
 		else
 			curPok.hp=curPok.hp + quant;
 		
-		System.out.println("Usou o item de vida");
+		System.out.println(Trainer.name+" usou o item de cura em "+Trainer.getPokqueue().name);
 
 	}
 	public String getClassName(){
@@ -265,7 +277,7 @@ class RunAway extends Event{
 
 
 	public void action() {
-		System.out.println("fugiu da luta");
+		System.out.println(Trainer.name+" fugiu da luta");
 
 	}
 	public String getClassName(){

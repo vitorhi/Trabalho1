@@ -29,8 +29,10 @@ class Battle{
 		Controller control= new Controller(player,enemy);
 		
 		long tm=System.currentTimeMillis();
-		control.addEvent(player.getPokqueue().getAtack(1),enemy.getPokqueue().getAtack(1));
-		player.getPokqueue().getAtack(1).atkTimeSet(tm+800);
+		
+		control.addEvent(player.getPokqueue().getAtack(0),enemy.getPokqueue().getAtack(0));
+		
+		player.getPokqueue().getAtack(1).atkTimeSet(tm);
 		enemy.getPokqueue().getAtack(1).atkTimeSet(tm+1600);
 		control.run();
 
@@ -57,45 +59,45 @@ public class Simulacao {
 		Pikachu.implementAtack("Volt Tackle", 3, 10);
 
 		Pokemon Bulbassauro = new Pokemon("Bulbassauro",40);
-		Pikachu.implementAtack("Vine Whip", 3, 10);
-		Pikachu.implementAtack("Tackle", 2, 10);
-		Pikachu.implementAtack("Razor Leaf", 1, 10);
-		Pikachu.implementAtack("Solar Beam", 4, 10);
+		Bulbassauro.implementAtack("Vine Whip", 3, 10);
+		Bulbassauro.implementAtack("Tackle", 2, 10);
+		Bulbassauro.implementAtack("Razor Leaf", 1, 10);
+		Bulbassauro.implementAtack("Solar Beam", 4, 10);
 
 		Pokemon Charmander = new Pokemon("Charmander",50);
-		Pikachu.implementAtack("Flamethrower", 4, 10);
-		Pikachu.implementAtack("Rage", 2, 10);
+		Charmander.implementAtack("Flamethrower", 4, 10);
+		Charmander.implementAtack("Rage", 2, 10);
 
 		Pokemon Pidgeotto = new Pokemon("Pidgeotto",35);
-		Pikachu.implementAtack("Sand_Attack", 2, 10);
+		Pidgeotto.implementAtack("Sand_Attack", 2, 10);
 
 		Pokemon Rattata = new Pokemon("Rattata",35);
-		Pikachu.implementAtack("Hyper Fang", 3, 10);
-		Pikachu.implementAtack("Thunderbolt", 2, 10);
-		Pikachu.implementAtack("Bite", 4, 10);
+		Rattata.implementAtack("Hyper Fang", 3, 10);
+		Rattata.implementAtack("Thunderbolt", 2, 10);
+		Rattata.implementAtack("Bite", 4, 10);
 
 		Pokemon Zubat = new Pokemon("Zubat",28);
-		Pikachu.implementAtack("Supersonic", 4, 10);
-		Pikachu.implementAtack("Fly", 3, 10);
-		Pikachu.implementAtack("Whirlwind", 2, 10);
-		Pikachu.implementAtack("Wing Attack", 4, 10);
+		Zubat.implementAtack("Supersonic", 4, 10);
+		Zubat.implementAtack("Fly", 3, 10);
+		Zubat.implementAtack("Whirlwind", 2, 10);
+		Zubat.implementAtack("Wing Attack", 4, 10);
 
 		Pokemon Magikarpa = new Pokemon("Magikarp",30);
-		Pikachu.implementAtack("Flail", 4, 10);
-		Pikachu.implementAtack("Splash", 2, 10);
+		Magikarpa.implementAtack("Flail", 4, 10);
+		Magikarpa.implementAtack("Splash", 2, 10);
 
 		Pokemon Squirtle = new Pokemon("Squirtle",30);
-		Pikachu.implementAtack("Aqua Tail", 4, 10);
-
-		Pokemon[]pokemons_Ash={Pikachu,Bulbassauro,Charmander,Pidgeotto};
-
-
+		Squirtle.implementAtack("Aqua Tail", 4, 10);
+		
+		Pokemon[]pokemons_Ash={Pikachu,Bulbassauro,Charmander,Pidgeotto};		
 		Pokemon[]pokemons_Rocket={Rattata,Zubat,Magikarpa,Squirtle};
-
+		
 		//criacao treinadores
 		PokemonTrainer Ash= new PokemonTrainer(pokemons_Ash,"Ash");
+		
 		PokemonTrainer RocketTm= new PokemonTrainer(pokemons_Rocket,"Equipe Rocket");
-		System.out.println(RocketTm.getPokqueue().atacks[0].name);;
+		
+		
 
 		//inicialização da batalha
 		
