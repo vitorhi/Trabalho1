@@ -23,14 +23,30 @@ class Battle{
 			enemy=fighter1;
 		}	
 		System.out.println("Você escolheu "+player.name);
-		EventSet es_player=new EventSet();
-		es_player.add(player.getPokqueue().getAtack(1));
-		es_player.add(player.getPokqueue().getAtack(1));
-		es_player.add(player.getPokqueue().getAtack(1));
-		es_player.add(player.getPokqueue().getAtack(1));
-		es_player.add(player.getPokqueue().getAtack(1));
 		
-		EventSet es_enemy=new EventSet();
+//		public class Controller {
+//			private EventSet es = new EventSet();
+//			public void addEvent(Event c) { es.add(c); }
+//			public void run() {
+//				Event e;
+//				while((e = es.getNext()) != null) {
+//					if(e.ready()) {
+//						e.action();
+//						
+//						es.removeCurrent();
+//					}
+//				}
+//			}
+//		}
+
+		EventSet es_player=new EventSet(player);
+		es_player.add(player.getPokqueue().getAtack(1));		
+		es_player.add(player.getPokqueue().getAtack(2));
+		es_player.add(player.getPokqueue().getAtack(3));
+		es_player.add(player.getPokqueue().getAtack(4));
+		es_player.add(player.getPokqueue().getAtack(2));
+		
+		EventSet es_enemy=new EventSet(enemy);
 		es_player.add(enemy.getPokqueue().getAtack(1));
 		es_player.add(enemy.getPokqueue().getAtack(1));
 		es_player.add(enemy.getPokqueue().getAtack(1));
@@ -78,7 +94,6 @@ public class Simulacao {
 		Pikachu.implementAtack("Fly", 3, 10);
 		Pikachu.implementAtack("Whirlwind", 2, 10);
 		Pikachu.implementAtack("Wing Attack", 4, 10);
-
 
 		Pokemon Magikarpa = new Pokemon("Magikarp",30);
 		Pikachu.implementAtack("Flail", 4, 10);

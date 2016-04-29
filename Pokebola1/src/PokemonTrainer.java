@@ -12,14 +12,19 @@ public class PokemonTrainer {
 
 			queue.add(vector_pokemon[i]);
 		}
-//		pokemons=vector_pokemon;
+
 		this.name=name;
 		// é aqui que adicionei a prioridade ao jogador
 		_prioridade++;
 	}
 	public Pokemon getPokqueue(){
-		return queue.element();
+		 if(queue.peek() == null){
+			 System.out.println("Todos os pokemons morreram!");
+			 return null;			 
+		 }	 
+		return queue.peek();
 	}
+	
 	
 	
 }

@@ -2,21 +2,29 @@
 abstract public class Event {
 
 	int priority;
+	PokemonTrainer Trainer;
 	String name;
-
-
-	public Event(String name){
-
-		this.name=name;
-
+	private long evtTime;
+	
+	public boolean ready() {
+		return System.currentTimeMillis() >= evtTime;
 	}
+		
+	public Event(String name,long eventTime){
+		evtTime = eventTime;
+		this.name=name;
+	}
+	
+	public void setTrainer(PokemonTrainer Trainer){
+		this.Trainer=Trainer;
+	}
+	
 	public String eventName(){
 		return name;
 	}
+	
 	abstract public void action();
 	abstract public String getClassName();
-
-
 
 }
 
@@ -24,7 +32,13 @@ class EventSet {
 	private Event[] events = new Event[50];
 	private int i = 0;
 	private int next = 0;
+	public PokemonTrainer TrainerSet;
+	
+	public EventSet(PokemonTrainer a){
+		TrainerSet=a;
+	}
 	public void add(Event e) {
+		e.setTrainer(TrainerSet);
 		if(i >= events.length)
 			return;
 		else{
@@ -53,26 +67,13 @@ class EventSet {
 	}
 }
 
-//class Controller {
-//	private EventSet es = new EventSet();
-//	public void addEvent(Event c) { es.add(c); }
-//	public void run() {
-//		Event e;
-//		while((e = es.getNext()) != null) {
-//
-//			e.action();
-//			
-//			es.removeCurrent();
-//
-//		}
-//	}
-//}	
+
 class Atack extends Event{
 	int quant;
 	int atkPriority;
 
-	public Atack(String name,int atkPriority,int q ) {
-		super(name);
+	public Atack(String name,int atkPriority,int q,long eventTime ) {
+		super(name,eventTime);
 		quant= q;
 		priority=1;
 		this.atkPriority=atkPriority;
@@ -93,15 +94,16 @@ class Atack extends Event{
 
 }
 class SwapPokemon extends Event{
-
-
-	public SwapPokemon() {
-		super("Trocar pokemon");		
+	
+	
+	public SwapPokemon(long eventTime) {
+		super("Trocar pokemon",eventTime);		
 		priority=3;
 
 	}
 	
 	public void action() {
+		Trainer.queue.add(Trainer.queue.poll());
 		System.out.println("Trocou de pokemon");
 		
 		
@@ -117,16 +119,21 @@ class UseItem extends Event{
 
 	int quant = 10;
 
-	public UseItem() {
-		super("Usar item");		
+	public UseItem(long eventTime) {
+		super("Usar item",eventTime);		
 		priority=2;
 	}
-	// O quanto ele recuperou de vida
-	public int quantity(){
-		return quant;
-	}
-
+	
 	public void action() {
+		Pokemon curPok=Trainer.getPokqueue();
+		
+		if(curPok.hp + quant >= curPok.hp){
+			curPok.hp = Pokemon.getMax_hp();//chance de estar errado, pois max hp é estatico
+			return;
+		}
+		else
+			curPok.hp=curPok.hp + quant;
+		
 		System.out.println("Usou o item de vida");
 
 	}
@@ -137,8 +144,8 @@ class UseItem extends Event{
 
 }
 class RunAway extends Event{
-	public RunAway() {
-		super("Fugir da luta");		
+	public RunAway(long eventTime) {
+		super("Fugir da luta",eventTime);		
 		priority=4;
 
 	}
