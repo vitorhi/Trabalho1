@@ -4,7 +4,7 @@ public class Pokemon {
 	int hp;
 	private static int max_hp;
 	boolean dead;
-	static int i=0;
+	protected static int i=0;
 	public Atack[] atacks=new Atack[4];
 	
 	public Pokemon (String name,int hp){
@@ -14,30 +14,12 @@ public class Pokemon {
 		// Coloquei um HP_Max para comparar na funcao GainHp
 		setMax_hp(hp);
 	}
-	
-	public void LoseHp(Atack atk){ 
-		if(atk.quantity()>hp){
-			dead=true;
-			return;		
-		}
-		else
-			hp=hp-atk.quantity();	
-	}
 
-	// Para recuperar vida
-//	public void GainHp(UseItem heal){
-//		// Caso ele recupere "muito" hp
-//		if(hp + heal.quantity() >= hp){
-//			hp = max_hp;
-//			return;
-//		}
-//		else
-//			hp=hp + heal.quantity();	
-//	}
-	
-	public void implementAtack(String nome,int atkPri,int q,long evtTime){
+	//falta resolver o problema do i ser estatico para todos os objetos
+	public void implementAtack(String nome,int atkPri,int q){
 				
-		Atack at= new Atack(nome,atkPri,q,evtTime);
+		Atack at= new Atack(nome,atkPri,q);
+		System.out.println(i+" "+i%4);
 		atacks[(i%4)]=at;
 		i++;
 		

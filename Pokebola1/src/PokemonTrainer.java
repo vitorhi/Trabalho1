@@ -2,7 +2,7 @@ import java.util.*;
 public class PokemonTrainer {
 	String name;
 	Queue<Pokemon> queue = new LinkedList<Pokemon>();
-	Pokemon []pokemons;
+	
 	// é aqui que coloquei a prioridade
 	static int _prioridade = 0;
 	

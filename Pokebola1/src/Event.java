@@ -2,9 +2,15 @@
 abstract public class Event {
 
 	int priority;
-	PokemonTrainer Trainer;
-	String name;
-	private long evtTime;
+	
+	public PokemonTrainer Trainer;
+	public String name;
+	protected long evtTime;
+	
+	//variaveis para evento tipo atack
+	int atkPriority;
+	int quant;
+	
 	
 	public boolean ready() {
 		return System.currentTimeMillis() >= evtTime;
@@ -14,8 +20,23 @@ abstract public class Event {
 		evtTime = eventTime;
 		this.name=name;
 	}
+	public Event(long eventTime){
+		evtTime = eventTime;
+		
+	}
+	
+	//construtor para evento tipo atack
+	public Event(String name,int atkPriority,int q ) {
+		this.name=name;
+		quant= q;
+		priority=1;
+		this.atkPriority=atkPriority;
+
+	}
 	
 	public void setTrainer(PokemonTrainer Trainer){
+		System.out.println("2");
+
 		this.Trainer=Trainer;
 	}
 	
@@ -38,7 +59,9 @@ class EventSet {
 		TrainerSet=a;
 	}
 	public void add(Event e) {
+		System.out.println("1");
 		e.setTrainer(TrainerSet);
+//		System.out.println("2");
 		if(i >= events.length)
 			return;
 		else{
@@ -66,17 +89,77 @@ class EventSet {
 		events[next] = null;
 	}
 }
-public class Controller {
-	private EventSet es = new EventSet();
-	public void addEvent(Event c) { es.add(c); }
+class Controller {
+	
+	PokemonTrainer t1,t2;
+	public Controller(PokemonTrainer x,PokemonTrainer y){
+		t1=x;
+		t2=y;
+	}
+	private EventSet es_a = new EventSet(t1);
+	private EventSet es_b = new EventSet(t2);
+	
+	public void addEvent(Event a,Event b) {
+		es_a.add(a);
+		
+		es_b.add(b);
+		
+	}
+	
 	public void run() {
 		Event e;
-		while((e = es.getNext()) != null) {
-			if(e.ready()) {
-				e.action();
-				
-				es.removeCurrent();
+		Event f;
+		while(((e = es_a.getNext()) != null)&&((f = es_b.getNext()) != null)) {
+			
+			//caso o evento seja um ataque
+			if(e.getClassName()=="Atack"){
+				if(e.atkPriority<f.atkPriority){
+					if(e.ready()) {
+						e.action();					
+						es_a.removeCurrent();					
+					}
+					if(f.ready()) {
+						f.action();
+						es_b.removeCurrent();
+					}
+				}
+				if(e.atkPriority>f.atkPriority){
+					if(f.ready()) {
+						f.action();
+						es_b.removeCurrent();
+					}
+					if(e.ready()) {
+						e.action();					
+						es_a.removeCurrent();					
+					}					
+				}
 			}
+			
+			//caso o evento não seja um ataque
+			else{
+				if(e.priority<f.priority){
+					if(e.ready()) {
+						e.action();					
+						es_a.removeCurrent();					
+					}
+					if(f.ready()) {
+						f.action();
+						es_b.removeCurrent();
+					}
+				}
+				if(e.priority>f.priority){
+					if(f.ready()) {
+						f.action();
+						es_b.removeCurrent();
+					}
+					if(e.ready()) {
+						e.action();					
+						es_a.removeCurrent();					
+					}					
+				}
+				
+			}
+			
 		}
 	}
 }
@@ -85,19 +168,36 @@ class Atack extends Event{
 	int quant;
 	int atkPriority;
 
-	public Atack(String name,int atkPriority,int q,long eventTime ) {
-		super(name,eventTime);
-		quant= q;
-		priority=1;
-		this.atkPriority=atkPriority;
-
+	public Atack(String name,int atkPriority,int q ) {
+		super(name,atkPriority,q);
 	}
+	
+	public void atkTimeSet(long eventTime){
+		evtTime=eventTime;
+	}
+	
 	public int quantity(){
 		return quant;
 	}
 
 	public void action() {
 		System.out.println("usou "+name);
+		//caso o dano seje maior do que o hp do pokemon
+		if(quant>Trainer.getPokqueue().hp){
+			//o Pokemon é morto
+			Trainer.getPokqueue().dead=true;
+			
+			//e removido da fila de pokemons do treinador
+			Trainer.queue.remove();
+			
+			System.out.println(Trainer.getPokqueue().name+"morreu...");
+			return;		
+		}
+		
+		//caso o dano seje menor do que o hp do pokemon
+		else
+			Trainer.getPokqueue().hp=(Trainer.getPokqueue().hp)-quant;
+				
 
 	}
 	public String getClassName(){

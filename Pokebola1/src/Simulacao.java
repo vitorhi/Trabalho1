@@ -3,8 +3,10 @@ import java.util.Scanner;
 class Battle{
 	PokemonTrainer fighter1;
 	PokemonTrainer fighter2;
-	PokemonTrainer player,enemy;
-
+	
+	PokemonTrainer player;
+	PokemonTrainer enemy;
+	
 	public Battle(PokemonTrainer a,PokemonTrainer b){
 		fighter1=a;
 		fighter2=b;
@@ -22,23 +24,19 @@ class Battle{
 			player=fighter2;
 			enemy=fighter1;
 		}	
+		scan.close();
 		System.out.println("Você escolheu "+player.name);
+		Controller control= new Controller(player,enemy);
 		
-		
+		long tm=System.currentTimeMillis();
+		control.addEvent(player.getPokqueue().getAtack(1),enemy.getPokqueue().getAtack(1));
+		player.getPokqueue().getAtack(1).atkTimeSet(tm+800);
+		enemy.getPokqueue().getAtack(1).atkTimeSet(tm+1600);
+		control.run();
 
-		EventSet es_player=new EventSet(player);
-		es_player.add(player.getPokqueue().getAtack(1));		
-		es_player.add(player.getPokqueue().getAtack(2));
-		es_player.add(player.getPokqueue().getAtack(3));
-		es_player.add(player.getPokqueue().getAtack(4));
-		es_player.add(player.getPokqueue().getAtack(2));
 		
-		EventSet es_enemy=new EventSet(enemy);
-		es_player.add(enemy.getPokqueue().getAtack(1));
-		es_player.add(enemy.getPokqueue().getAtack(1));
-		es_player.add(enemy.getPokqueue().getAtack(1));
-		es_player.add(enemy.getPokqueue().getAtack(1));
-		es_player.add(enemy.getPokqueue().getAtack(1));
+		
+		
 
 	}
 
@@ -97,10 +95,13 @@ public class Simulacao {
 		//criacao treinadores
 		PokemonTrainer Ash= new PokemonTrainer(pokemons_Ash,"Ash");
 		PokemonTrainer RocketTm= new PokemonTrainer(pokemons_Rocket,"Equipe Rocket");
+		System.out.println(RocketTm.getPokqueue().atacks[0].name);;
 
 		//inicialização da batalha
-		//		Battle bt = new Battle(Ash, RocketTm);
-		//		bt.Init();	
+		
+		Battle bt = new Battle(Ash, RocketTm);
+		
+		bt.Init();	
 
 	}
 
