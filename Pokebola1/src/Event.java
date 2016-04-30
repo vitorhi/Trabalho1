@@ -111,9 +111,10 @@ class Controller {
 		
 	}
 	
-	public void run() {
+	public String run() {
 		Event e;
 		Event f;
+		PokemonTrainer Winner=es_a.TrainerSet;
 		while(((e = es_a.getNext()) != null)&&((f = es_b.getNext()) != null)) {
 			
 			//caso os dois eventos sejam um ataque
@@ -122,32 +123,35 @@ class Controller {
 				 
 
 				if(e.atkPriority<=f.atkPriority){
-					if(e.ready()&&f.ready()) {
-//						System.out.println(e.name);
-						e.action();	
-						es_a.removeCurrent();
-						f.action();
-						es_b.removeCurrent();
-											
-					}
-//					if(e.ready()) {
+//					if(e.ready()&&f.ready()) {
 ////						System.out.println(e.name);
-//						e.action();		
-//
-//						es_a.removeCurrent();					
-//					}
-//					if(f.ready()) {
+//						e.action();	
+//						es_a.removeCurrent();
 //						f.action();
 //						es_b.removeCurrent();
+//											
 //					}
+					if(e.ready()) {
+//						System.out.println(e.name);
+						e.action();		
+						System.out.println();
+						es_a.removeCurrent();					
+					}
+					if(f.ready()) {
+						f.action();
+						System.out.println();
+						es_b.removeCurrent();
+					}
 				}
 				if(e.atkPriority>f.atkPriority){
 					if(f.ready()) {
 						f.action();
+						System.out.println();
 						es_b.removeCurrent();
 					}
 					if(e.ready()) {
-						e.action();					
+						e.action();		
+						System.out.println();
 						es_a.removeCurrent();					
 					}					
 				}
@@ -182,22 +186,56 @@ class Controller {
 			//caso nenhum dos eventos seja um ataque
 			else if(e.getClassName()!="Atack"||f.getClassName()!="Atack"){
 				if(e.priority<f.priority){
+					if(e.getClassName()=="RunAway"){
+						e.action();		
+						System.out.println();
+						es_a.removeCurrent();
+						Winner=es_b.TrainerSet;
+						break;
+					}
+					
 					if(e.ready()) {
-						e.action();					
+						e.action();	
+						System.out.println();
 						es_a.removeCurrent();					
+					}
+					
+					if(f.getClassName()=="RunAway"){
+						f.action();		
+						System.out.println();
+						es_a.removeCurrent();
+						Winner=es_a.TrainerSet;
+						break;
 					}
 					if(f.ready()) {
 						f.action();
+						System.out.println();
 						es_b.removeCurrent();
 					}
 				}
 				if(e.priority>f.priority){
+					if(f.getClassName()=="RunAway") {
+						f.action();		
+						System.out.println();
+						es_a.removeCurrent();
+						Winner=es_a.TrainerSet;
+						break;
+					}
 					if(f.ready()) {
 						f.action();
+						System.out.println();
 						es_b.removeCurrent();
 					}
+					if(e.getClassName()=="RunAway") {
+						e.action();		
+						System.out.println();
+						es_a.removeCurrent();
+						Winner=es_b.TrainerSet;
+						break;
+					}
 					if(e.ready()) {
-						e.action();					
+						e.action();		
+						System.out.println();
 						es_a.removeCurrent();					
 					}					
 				}
@@ -205,7 +243,7 @@ class Controller {
 			}
 			
 		}
-		//adicionar caso de vencedor e de empate
+		return Winner.name;//adicionar caso de vencedor e de empate
 	}
 }
 
@@ -215,6 +253,7 @@ class Atack extends Event{
 
 	public Atack(String name,int atkPriority,int q ) {
 		super(name,atkPriority,q);
+		priority=1;
 	}
 	
 	public void atkTimeSet(long eventTime){
@@ -227,19 +266,23 @@ class Atack extends Event{
 
 	public void action() {
 		
-		System.out.println(Trainer.getPokqueue().name+ " usou " +name);
+		Trainer.getPokqueue();
+		
+		System.out.println(Trainer.getPokqueue().name+ " usou " +Trainer.getPokqueue().atacks[Pokemon.n_copy].name);
 
 		
 
 		//caso o dano seje maior do que o hp do pokemon
 		if(quant>Enemy.getPokqueue().hp){
 			//o Pokemon é morto
-			Enemy.getPokqueue().dead=true;
+			Enemy.getPokqueue().dead=true;		
+			
+			
+			System.out.println(Enemy.getPokqueue().name+" morreu...");
+			
 			
 			//e removido da fila de pokemons do treinador
 			Enemy.queue.remove();
-			
-			System.out.println(Enemy.getPokqueue().name+" morreu...");
 			return;		
 		}
 		
@@ -288,7 +331,6 @@ class UseItem extends Event{
 	public UseItem(long eventTime) {	
 
 		super("Usar item",eventTime);
-		System.out.println("imploro");
 		priority=2;
 	}
 	
@@ -321,7 +363,7 @@ class RunAway extends Event{
 
 	public void action() {
 		System.out.println(Trainer.name+" fugiu da luta");
-		
+				
 	}
 	public String getClassName(){
 		return"RunAway";

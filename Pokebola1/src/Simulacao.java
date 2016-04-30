@@ -30,18 +30,23 @@ class Battle{
 		Controller control= new Controller(player,enemy);
 		
 		long tm=System.currentTimeMillis();
+		
+		control.addEvent(player.getPokqueue().getAtack(0,tm+6000),enemy.PmonRA(tm+7000));
 
-		control.addEvent(player.getPokqueue().getAtack(0,tm),enemy.getPokqueue().getAtack(0,tm+800));
+		control.addEvent(player.getPokqueue().getAtack(0,tm+5000),enemy.getPokqueue().getAtack(0,tm+5000));
+		control.addEvent(player.getPokqueue().getAtack(0,tm+4000),enemy.getPokqueue().getAtack(0,tm+4000));
 
 //		player.getPokqueue().getAtack(1).atkTimeSet(tm);
 //		enemy.getPokqueue().getAtack(1).atkTimeSet(tm+800);
 		
-		control.addEvent(player.getPokqueue().getAtack(1,tm+1600),enemy.getPokqueue().getAtack(2,tm+3200));
+		control.addEvent(player.getPokqueue().getAtack(1,tm+2000),enemy.getPokqueue().getAtack(2,tm+2000));
 
 //		player.getPokqueue().getAtack(1).atkTimeSet(tm+1600);
 //		enemy.getPokqueue().getAtack(0).atkTimeSet(tm+2400);
-		control.addEvent(player.PmonSP(tm+8000),enemy.getPokqueue().getAtack(2,tm+10000));
-		control.run();
+		control.addEvent(player.PmonSP(tm+1000),enemy.getPokqueue().getAtack(2,tm+1000));
+		control.addEvent(player.getPokqueue().getAtack(1,tm),enemy.getPokqueue().getAtack(2,tm));
+		
+		System.out.println(control.run()+" é o vencedor!");
 		
 		
 		
