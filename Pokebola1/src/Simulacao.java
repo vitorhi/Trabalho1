@@ -249,7 +249,7 @@ class Exercicio_2{
 				
 		if(andar == 'a'){ // esquerda
 		
-			if(this.Mapa[i][j] == '_' || this.Mapa[i][j] == '|'){
+			if(this.Mapa[i-1][j] == '_' || this.Mapa[i-1][j] == '|'){
 				System.out.println("Tolinho... Voce nao pode atravessar paredes!");
 			}
 			
@@ -261,7 +261,7 @@ class Exercicio_2{
 
 		else if(andar == 's'){ // para baixo
 		
-			if(this.Mapa[i][j] == '_' || this.Mapa[i][j] == '|'){
+			if(this.Mapa[i][j+1] == '_' || this.Mapa[i][j+1] == '|'){
 				System.out.println("Tolinho... Voce nao pode atravessar paredes!");
 			}
 			
@@ -273,7 +273,7 @@ class Exercicio_2{
 
 		else if(andar == 'd'){ // direita
 		
-			if(this.Mapa[i][j] == '_' || this.Mapa[i][j] == '|'){
+			if(this.Mapa[i+1][j] == '_' || this.Mapa[i+1][j] == '|'){
 				System.out.println("Tolinho... Voce nao pode atravessar paredes!");
 			}
 		
@@ -285,7 +285,7 @@ class Exercicio_2{
 
 		else if(andar == 'w'){ // para cima
 		
-			if(this.Mapa[i][j] == '_' || this.Mapa[i][j] == '|'){
+			if(this.Mapa[i][j-1] == '_' || this.Mapa[i][j-1] == '|'){
 				System.out.println("Tolinho... Voce nao pode atravessar paredes!");
 			}
 			

@@ -5,6 +5,8 @@ semestre de 2016.
 
   O programa consiste em uma simulação de Batalha Pokemon entre 2 treinadores pokemons.
   
+  Para executar o programa, execute a Simulação.java
+  
   
   Alunos:
   
