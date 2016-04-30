@@ -36,22 +36,22 @@ class Battle{
 		System.out.println();
 		Controller control= new Controller(player,enemy);
 		
-		long tm=System.currentTimeMillis();
-		
-		control.addEvent(player.getPokqueue().getAtack(0,tm+6000),enemy.PmonRA(tm+7000));
+//		long tm=System.currentTimeMillis();
+//		
+		control.addEvent(player.getPokqueue().getAtack(0),enemy.PmonRA());
 
-		control.addEvent(player.getPokqueue().getAtack(0,tm+5000),enemy.getPokqueue().getAtack(0,tm+5000));
-		control.addEvent(player.getPokqueue().getAtack(0,tm+4000),enemy.getPokqueue().getAtack(0,tm+4000));
+		control.addEvent(player.getPokqueue().getAtack(0),enemy.getPokqueue().getAtack(0));
+		control.addEvent(player.getPokqueue().getAtack(0),enemy.getPokqueue().getAtack(0));
 
 //		player.getPokqueue().getAtack(1).atkTimeSet(tm);
 //		enemy.getPokqueue().getAtack(1).atkTimeSet(tm+800);
 		
-		control.addEvent(player.getPokqueue().getAtack(1,tm+2000),enemy.getPokqueue().getAtack(2,tm+2000));
+		control.addEvent(player.getPokqueue().getAtack(1),enemy.getPokqueue().getAtack(2));
 
 //		player.getPokqueue().getAtack(1).atkTimeSet(tm+1600);
 //		enemy.getPokqueue().getAtack(0).atkTimeSet(tm+2400);
-		control.addEvent(player.PmonSP(tm+1999),enemy.getPokqueue().getAtack(2,tm+70));
-		control.addEvent(player.getPokqueue().getAtack(1,tm),enemy.getPokqueue().getAtack(2,tm));
+		control.addEvent(player.PmonSP(),enemy.getPokqueue().getAtack(2));
+		control.addEvent(player.getPokqueue().getAtack(1),enemy.getPokqueue().getAtack(2));
 		
 		System.out.println(control.run()+" é o vencedor!");
 		
@@ -87,18 +87,18 @@ class Battle{
 		// Para gerar os ataques aleatorios
 		Random gerador = new Random();
 		
-		long tm=System.currentTimeMillis();
+//		long tm=System.currentTimeMillis();
 		if(true){
-			control.addEvent(player.getPokqueue().getAtack(0,tm+5000),enemy.getPokqueue().getAtack(gerador.nextInt(3)+1,tm+5000));
+			control.addEvent(player.getPokqueue().getAtack(0),enemy.getPokqueue().getAtack(gerador.nextInt(3)+1));
 	
 	//		player.getPokqueue().getAtack(1).atkTimeSet(tm);
 	//		enemy.getPokqueue().getAtack(1).atkTimeSet(tm+800);
 			
-			control.addEvent(player.PmonUI(tm+1600),enemy.getPokqueue().getAtack(gerador.nextInt(3)+1,tm+3200));
+			control.addEvent(player.PmonUI(),enemy.getPokqueue().getAtack(gerador.nextInt(3)+1));
 	
 	//		player.getPokqueue().getAtack(1).atkTimeSet(tm+1600);
 	//		enemy.getPokqueue().getAtack(0).atkTimeSet(tm+2400);
-			control.addEvent(player.getPokqueue().getAtack(0,tm),enemy.getPokqueue().getAtack(gerador.nextInt(3)+1,tm));
+			control.addEvent(player.getPokqueue().getAtack(0),enemy.getPokqueue().getAtack(gerador.nextInt(3)+1));
 			control.run();
 		}
 	}

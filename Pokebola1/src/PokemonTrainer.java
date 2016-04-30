@@ -36,16 +36,16 @@ public class PokemonTrainer {
 		return queue.peek();
 	}
 	
-	public SwapPokemon PmonSP(long evTime){
-		SwapPokemon SP=new SwapPokemon(evTime);
+	public SwapPokemon PmonSP(){
+		SwapPokemon SP=new SwapPokemon();
 		return SP;
 	}
-	public UseItem PmonUI(long evTime){
-		UseItem		UI=new UseItem(evTime);
+	public UseItem PmonUI(){
+		UseItem		UI=new UseItem();
 		return UI;
 	}
-	public RunAway PmonRA(long evTime){
-		RunAway		RA=new RunAway(evTime);
+	public RunAway PmonRA(){
+		RunAway		RA=new RunAway();
 		return RA;
 	}
 }

@@ -23,14 +23,14 @@ abstract public class Event {
 //		return System.currentTimeMillis() >= evtTime;
 	}
 		
-	public Event(String name,long eventTime){
-		evtTime = eventTime;
+	public Event(String name){
+		
 		this.name=name;
 	}
-	public Event(long eventTime){
-		evtTime = eventTime;
-		
-	}
+//	public Event(long eventTime){
+//		evtTime = eventTime;
+//		
+//	}
 	
 	//construtor para evento tipo atack
 	public Event(String name,int atkPriority,int q ) {
@@ -310,8 +310,8 @@ class Atack extends Event{
 class SwapPokemon extends Event{
 	
 	
-	public SwapPokemon(long eventTime) {
-		super("Trocar pokemon",eventTime);		
+	public SwapPokemon() {
+		super("Trocar pokemon");		
 		priority=3;
 
 	}
@@ -333,9 +333,9 @@ class UseItem extends Event{
 
 	int quant = 10;
 
-	public UseItem(long eventTime) {	
+	public UseItem() {	
 
-		super("Usar item",eventTime);
+		super("Usar item");
 		priority=2;
 	}
 	
@@ -359,8 +359,8 @@ class UseItem extends Event{
 
 }
 class RunAway extends Event{
-	public RunAway(long eventTime) {
-		super("Fugir da luta",eventTime);		
+	public RunAway() {
+		super("Fugir da luta");		
 		priority=4;
 
 	}
