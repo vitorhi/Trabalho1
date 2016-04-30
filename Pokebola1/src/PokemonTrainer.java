@@ -29,6 +29,8 @@ public class PokemonTrainer {
 
 		 if(queue.peek() == null){
 			 System.out.println("Todos os pokemons morreram!");
+			 System.out.println("Game Over");
+			 Runtime.getRuntime().exit(0);			 			 
 			 return null;			 
 		 }	 
 		return queue.peek();

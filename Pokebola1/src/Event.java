@@ -1,4 +1,4 @@
-
+import java.util.concurrent.TimeUnit;
 abstract public class Event {
 
 	int priority;
@@ -13,7 +13,14 @@ abstract public class Event {
 	
 	
 	public boolean ready() {
-		return System.currentTimeMillis() >= evtTime;
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		return true;
+//		return System.currentTimeMillis() >= evtTime;
 	}
 		
 	public Event(String name,long eventTime){
