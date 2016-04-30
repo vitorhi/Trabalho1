@@ -268,9 +268,7 @@ class Atack extends Event{
 		
 		Trainer.getPokqueue();
 		
-		System.out.println(Trainer.getPokqueue().name+ " usou " +Trainer.getPokqueue().atacks[Pokemon.n_copy].name);
-
-		
+		System.out.println(Trainer.getPokqueue().name+ " usou " +Trainer.getPokqueue().atacks[0].name);		
 
 		//caso o dano seje maior do que o hp do pokemon
 		if(quant>Enemy.getPokqueue().hp){

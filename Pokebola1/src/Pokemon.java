@@ -5,7 +5,7 @@ public class Pokemon {
 	int max_hp;
 	boolean dead;
 	int i=0;
-	static int n_copy;
+	int n_copy=0;
 	public Atack[] atacks=new Atack[4];
 	
 	public Pokemon (String name,int hp){
@@ -30,10 +30,10 @@ public class Pokemon {
 	}
 	
 	public Atack getAtack(int n,long evtime){
-		n_copy=n;
-		atacks[n_copy].evtTime=evtime;
+		
+		atacks[n].evtTime=evtime;
 
-		return atacks[n_copy];
+		return atacks[n];
 	}
 	public boolean isDead(){
 		if(dead==true)
